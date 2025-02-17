@@ -1,0 +1,14 @@
+{
+  "name": "real-estate-api",
+  "version": "1.0.0",
+  "description": "Real Estate API using Node.js and SQLite",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "body-parser": "^1.20.2"
+  }
+}
