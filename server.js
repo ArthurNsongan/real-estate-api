@@ -97,6 +97,14 @@ const port = process.env.PORT || 3000;
     if (!type || !bedrooms || !kitchens || !living_rooms || !toilets || !price || !address) {
       return res.status(400).json({ error: 'All fields are required' });
     }
+
+    // Validate price
+    if (Number(price) <= 0) {
+      res.status(400).json({ 
+        error: 'Invalid status. Must be one of: ' + VALID_STATUSES.join(', ')
+      });
+      return;
+    }
   
     // Validate status
     const validStatuses = ['available', 'en travaux', 'occupied'];
