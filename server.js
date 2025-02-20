@@ -151,7 +151,7 @@ const port = process.env.PORT || 3000;
     try {
       const result = await pool.query(`
         UPDATE properties 
-        SET type = $1, bedrooms0
+        SET type = $1, bedrooms
          = $2, kitchens = $3, living_rooms = $4, 
             toilets = $5, price = $6, address = $7, status = $8
         WHERE id = $9
