@@ -181,7 +181,7 @@ const port = process.env.PORT || 3000;
   });
   
   // Search properties with filters
-  app.get('/api/properties-search', async (req, res) => {
+  app.get('/api/properties/search/', async (req, res) => {
     const conditions = [];
     const params = [];
     let paramCount = 1;
