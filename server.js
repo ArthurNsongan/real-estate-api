@@ -67,6 +67,48 @@ const port = process.env.PORT || 3000;
       res.status(500).json({ error: err.message });
     }
   });
+
+
+  // Search properties with filters
+  app.get('/api/properties/search/', async (req, res) => {
+    const conditions = [];
+    const params = [];
+    let paramCount = 1;
+  
+    if (req.query.type) {
+      conditions.push(`type = $${paramCount}`);
+      params.push(req.query.type);
+      paramCount++;
+    }
+    if (req.query.min_bedrooms) {
+      conditions.push(`bedrooms >= $${paramCount}`);
+      params.push(req.query.min_bedrooms);
+      paramCount++;
+    }
+    if (req.query.max_price) {
+      conditions.push(`price <= $${paramCount}`);
+      params.push(req.query.max_price);
+      paramCount++;
+    }
+    if (req.query.status) {
+      conditions.push(`status = $${paramCount}`);
+      params.push(req.query.status);
+      paramCount++;
+    }
+  
+    const sql = `
+      SELECT * FROM properties 
+      ${conditions.length ? 'WHERE ' + conditions.join(' AND ') : ''}
+      ORDER BY created_at DESC
+    `;
+  
+    try {
+      const result = await pool.query(sql, params);
+      res.json(result.rows);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
   
   // GET property by ID
   app.get('/api/properties/:id', async (req, res) => {
@@ -175,47 +217,6 @@ const port = process.env.PORT || 3000;
         return res.status(404).json({ error: 'Property not found' });
       }
       res.json({ message: 'Property deleted successfully' });
-    } catch (err) {
-      res.status(500).json({ error: err.message });
-    }
-  });
-  
-  // Search properties with filters
-  app.get('/api/properties/search/', async (req, res) => {
-    const conditions = [];
-    const params = [];
-    let paramCount = 1;
-  
-    if (req.query.type) {
-      conditions.push(`type = $${paramCount}`);
-      params.push(req.query.type);
-      paramCount++;
-    }
-    if (req.query.min_bedrooms) {
-      conditions.push(`bedrooms >= $${paramCount}`);
-      params.push(req.query.min_bedrooms);
-      paramCount++;
-    }
-    if (req.query.max_price) {
-      conditions.push(`price <= $${paramCount}`);
-      params.push(req.query.max_price);
-      paramCount++;
-    }
-    if (req.query.status) {
-      conditions.push(`status = $${paramCount}`);
-      params.push(req.query.status);
-      paramCount++;
-    }
-  
-    const sql = `
-      SELECT * FROM properties 
-      ${conditions.length ? 'WHERE ' + conditions.join(' AND ') : ''}
-      ORDER BY created_at DESC
-    `;
-  
-    try {
-      const result = await pool.query(sql, params);
-      res.json(result.rows);
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
