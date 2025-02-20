@@ -107,9 +107,9 @@ const port = process.env.PORT || 3000;
     }
   
     // Validate status
-    const validStatuses = ['available', 'en travaux', 'occupied'];
+    const validStatuses = ['available', 'under construction', 'occupied'];
     if (!validStatuses.includes(status)) {
-      return res.status(400).json({ error: 'Invalid status. Must be one of: available, en travaux, occupied' });
+      return res.status(400).json({ error: 'Invalid status. Must be one of: available, under construction, occupied' });
     }
   
     try {
@@ -143,9 +143,9 @@ const port = process.env.PORT || 3000;
     }
   
     // Validate status
-    const validStatuses = ['available', 'en travaux', 'occupied'];
+    const validStatuses = ['available', 'under construction', 'occupied'];
     if (!validStatuses.includes(status)) {
-      return res.status(400).json({ error: 'Invalid status. Must be one of: available, en travaux, occupied' });
+      return res.status(400).json({ error: 'Invalid status. Must be one of: available, under construction, occupied' });
     }
   
     try {
@@ -223,9 +223,9 @@ const port = process.env.PORT || 3000;
   
   // Get properties by status
   app.get('/api/properties/status/:status', async (req, res) => {
-    const validStatuses = ['available', 'en travaux', 'occupied'];
+    const validStatuses = ['available', 'under construction', 'occupied'];
     if (!validStatuses.includes(req.params.status)) {
-      return res.status(400).json({ error: 'Invalid status. Must be one of: available, en travaux, occupied' });
+      return res.status(400).json({ error: 'Invalid status. Must be one of: available, under construction, occupied' });
     }
   
     try {
