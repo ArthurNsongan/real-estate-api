@@ -19,7 +19,7 @@ const port = process.env.PORT || 3000;
   app.use(bodyParser.json());
 
   var postgres_url = 
-  "postgresql://b_card_strapi_user:mfXY7ZBdf90Zx6KEow8NVjyNmRbS2LU1@dpg-cud6fe8gph6c738m48bg-a.virginia-postgres.render.com/b_card_strapi"
+  "postgresql://b_card_strapi_vwxe_user:7Vtjwu7EVRrQjKGulS68Q3G30NQWPAOx@dpg-cutfbf3qf0us739ucbdg-a.virginia-postgres.render.com/b_card_strapi_vwxe"
   
     // Database connection
   const pool = new Pool({
